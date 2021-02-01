@@ -22,14 +22,13 @@ def getCategories():
             categorie = str(categorie.text)
             categorie = categorie.replace('\n', '')
             categorie = categorie.replace('  ', '')
-            dict[categorie] = link
+            dict[categorie] = 'http://books.toscrape.com/catalogue/category/' + link
 
 
 getCategories()
 print(dict['Mystery'])
 mycategori = Category('Mystery', dict['Mystery'])
+mycategori.getAllPage()
 print(mycategori.url)
-mycategori.addBooks()
-theBook = mycategori.books[0]
-print(theBook.starRating)
+
 
