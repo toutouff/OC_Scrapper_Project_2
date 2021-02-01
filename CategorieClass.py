@@ -1,9 +1,11 @@
 import requests
+import csv
 from bs4 import BeautifulSoup
 from BookClass import Book
 
 class Category:
     def __init__(self, name, url):
+        self.bookData = []
         self.name = name
         self.url = [url]
         self.books = []
@@ -30,6 +32,7 @@ class Category:
         for bookLink in self.bookLinks:
             mybook = Book(bookLink, self.name)
             mybook.getInfo()
+            self.bookData.append(mybook.Info)
             self.books.append(mybook)
 
     def getAllPage(self):
@@ -41,3 +44,11 @@ class Category:
             self.url.append(provUrl)
             i = i + 1
             nbrTotProd = nbrTotProd - 20
+
+    def createCsv(self):
+        csv_file = self.name + '.csv'
+        with open(csv_file, 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=self.bookData[0].keys())
+            writer.writeheader()
+            for data in self.bookData:
+                writer.writerow(data)

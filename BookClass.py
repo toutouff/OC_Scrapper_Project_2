@@ -33,7 +33,7 @@ class Book:
         self.Info = {
             'url': self.url,
             'upc': self.upc,
-            'title': self.getTitle,
+            'title': self.title,
             'price_including_tax': self.priceIncTax,
             'price_excluding_tax': self.priceeExTax,
             'number_available': self.nbrAiv,

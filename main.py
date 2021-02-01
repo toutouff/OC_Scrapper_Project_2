@@ -26,9 +26,9 @@ def getCategories():
 
 
 getCategories()
-print(dict['Mystery'])
-mycategori = Category('Mystery', dict['Mystery'])
-mycategori.getAllPage()
-print(mycategori.url)
+for categorie in dict.keys():
+    mycategori = Category(categorie, dict[categorie])
+    mycategori.addBooks()
+    mycategori.createCsv()
 
 
