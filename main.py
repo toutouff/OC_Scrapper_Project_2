@@ -27,7 +27,7 @@ def getCategories():
 
 getCategories()
 print(dict['Mystery'])
-mycategori = Category('Mystery',dict['Mystery'])
+mycategori = Category('Mystery', dict['Mystery'])
 print(mycategori.url)
 mycategori.addBooks()
 theBook = mycategori.books[0]

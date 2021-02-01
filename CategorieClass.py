@@ -27,8 +27,3 @@ class Category:
             mybook = Book(bookLink, self.name)
             mybook.getInfo()
             self.books.append(mybook)
-
-    def createCSV(self):
-        with open(self.name + '.csv', 'w') as outf:
-            outf.write(
-                'product_page_url , universal_product_code , title , price_including_tax , price_excluding_tax , number_available , product_description , category , review_rating , image_url \n')

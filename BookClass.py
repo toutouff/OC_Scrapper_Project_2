@@ -50,4 +50,5 @@ class Book:
     def getImg(self):
         row = self.soup.find_all('div', class_='col-sm-6')
         img = row[0].find('img')
-        self.img = img['src']
+        img = str(img['src'])
+        self.img = 'https://books.toscrape.com/' + img.replace('../', '')
