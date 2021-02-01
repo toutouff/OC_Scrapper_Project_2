@@ -31,4 +31,5 @@ mycategori = Category('Mystery', dict['Mystery'])
 print(mycategori.url)
 mycategori.addBooks()
 theBook = mycategori.books[0]
-print(theBook.img)
+print(theBook.starRating)
+

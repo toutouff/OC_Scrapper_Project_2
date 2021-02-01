@@ -29,6 +29,7 @@ class Book:
         self.getTitle()
         self.getProductDescription()
         self.getImg()
+        self.getStarRating()
         self.Info = {
             'url': self.url,
             'upc': self.upc,
@@ -38,7 +39,7 @@ class Book:
             'number_available': self.nbrAiv,
             'product_description': self.productdescription,
             'category': self.categorie,
-            'review_rating': 0,
+            'review_rating': self.starRating,
             'image_url': self.img
         }
         return self.Info
@@ -52,3 +53,11 @@ class Book:
         img = row[0].find('img')
         img = str(img['src'])
         self.img = 'https://books.toscrape.com/' + img.replace('../', '')
+
+    def getStarRating(self):
+        div = self.soup.findAll('div', class_='col-sm-6')
+        p = div[1].findAll('p')
+        p = p[2]
+        starRating = p['class']
+        self.starRating = starRating[1]
+
