@@ -19,7 +19,7 @@ Il contient les information suivante :
 
 La premiere ligne de chaque colonne indique sont contenu 
 
-# Constitution du programe
+# Constitution :
 
 - main.py est le programme a compiler et executer a l’aide de python 3 
 
