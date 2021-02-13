@@ -1,11 +1,11 @@
 # OC_Scrapper_Project_2
 
-OC_scrapper est un logiciel de Scrapping developer pour le site Book To Scrape 
-Il créé un document , en format csv , pour chaque catégorie 
+OC_scrapper est un logiciel de Scrapping developé pour le site Book To Scrape 
+Il créer un document en format csv pour chaque catégorie 
 
-# Resultat : 
+# Resultats : 
 Chaque ficher porte le format : categorie.csv 
-Il contient les information suivante : 
+Il contient les informations suivantes : 
 - product_page_url
 - universal_ product_code (upc)
 - title
@@ -21,21 +21,21 @@ La premiere ligne de chaque colonne indique sont contenu
 
 # Constitution :
 
-- __init__.py est l'executable .
+- __init__.py est l'executable.
 
 - le dossier Classes contient un fichier __init__.py qui contient les classes.
-- de meme pour le dossier Fonctions qui contient un fichier __init__.py qui contient les fonctions.
+- de même pour le dossier Fonctions qui contient un fichier __init__.py qui contient les fonctions.
 
-- Requirement.txt contient la liste de tout les module nécessaire au bon fonctionnement
+- Requirement.txt contient la liste de tous les modules nécessaires au bon fonctionnement.
 # Mise en place de l'environement Virturel :
 
-- creation du nouvelle environement :
+- creation du nouvel environement :
 
 python3 -m venv /path/to/new/virtual/environment
 
-- acceder a l'environement :
+- acceder à l'environement :
 
-sur windows utiliser :
+sur Windows utiliser :
 
 c:\>c:\Python35\python -m venv c:\path\to\myenv
 
@@ -43,7 +43,7 @@ sur Mac et Linux  utiliser :
 
 c:\>python -m venv c:\path\to\myenv
 
-- instalation des package :
+- instalation des packages :
 
 il vous faudra installer bs4 et request
 
