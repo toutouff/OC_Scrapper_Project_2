@@ -5,6 +5,7 @@ Il créer un document en format csv pour chaque catégorie
 
 # Resultats : 
 Chaque ficher porte le format : categorie.csv 
+
 Il contient les informations suivantes : 
 - product_page_url
 - universal_ product_code (upc)
