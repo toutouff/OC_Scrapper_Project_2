@@ -27,5 +27,23 @@ La premiere ligne de chaque colonne indique sont contenu
 - de meme pour le dossier Fonctions qui contient un fichier __init__.py qui contient les fonctions.
 
 - Requirement.txt contient la liste de tout les module nécessaire au bon fonctionnement
-# Mise en place de l'environement Virtur- reat
+# Mise en place de l'environement Virturel :
+
+- creation du nouvelle environement :
+
 python3 -m venv /path/to/new/virtual/environment
+
+- acceder a l'environement :
+
+sur windows utiliser :
+c:\>c:\Python35\python -m venv c:\path\to\myenv
+
+sur Mac et Linux  utiliser :
+c:\>python -m venv c:\path\to\myenv
+
+- instalation des package :
+il vous faudra installer bs4 et request
+
+python3 pip install bs4
+python3 pip install request
+
