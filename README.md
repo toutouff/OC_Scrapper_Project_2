@@ -21,8 +21,11 @@ La premiere ligne de chaque colonne indique sont contenu
 
 # Constitution :
 
-- main.py est le programme a compiler et executer a l’aide de python 3 
+- __init__.py est l'executable .
 
-- BookClass.py et CategorieClass.py sont des ficher class qui contienne respectivement les class Book(livre) et Catégorie 
+- le dossier Classes contient un fichier __init__.py qui contient les classes.
+- de meme pour le dossier Fonctions qui contient un fichier __init__.py qui contient les fonctions.
 
 - Requirement.txt contient la liste de tout les module nécessaire au bon fonctionnement
+# Mise en place de l'environement Virtur- reat
+python3 -m venv /path/to/new/virtual/environment
