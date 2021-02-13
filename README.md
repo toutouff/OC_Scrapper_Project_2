@@ -36,14 +36,18 @@ python3 -m venv /path/to/new/virtual/environment
 - acceder a l'environement :
 
 sur windows utiliser :
+
 c:\>c:\Python35\python -m venv c:\path\to\myenv
 
 sur Mac et Linux  utiliser :
+
 c:\>python -m venv c:\path\to\myenv
 
 - instalation des package :
+
 il vous faudra installer bs4 et request
 
 python3 pip install bs4
+
 python3 pip install request
 
