@@ -1,4 +1,4 @@
 import Fonctions
 
 if __name__ == '__main__':
-    Fonctions.Main()
+    Fonctions.main()

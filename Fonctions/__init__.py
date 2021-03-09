@@ -1,36 +1,38 @@
 import requests
 from bs4 import BeautifulSoup
 
+
+
 def main():
     import Classes
-    data = Fonctions.getCategories()
-    for categorie in data.keys():
-        mycategori = Classes.Category(categorie, data[categorie])
-        mycategori.addBooks()
-        mycategori.createCsv()
+    data = get_categories()
+    for category in data.keys():
+        my_category = Classes.Category(category, data[category])
+        my_category.add_books()
+        my_category.create_csv()
 
 
 categories = []
 links = []
-dict = {}
+category_links_dict = {}
 
 
-def getCategories():
+def get_categories():
     url = 'http://books.toscrape.com/catalogue/category/books_1/index.html'
-    reponse = requests.get(url)
-    if reponse.ok:
-        soup = BeautifulSoup(reponse.text, features="html.parser")
-        divSideCategories = soup.find('div', class_='side_categories')
-        ulNavList = divSideCategories.find('ul', class_='nav nav-list')
-        ulCategories = ulNavList.find('ul')
-        aCategories = ulCategories.findAll('a')
-        for categorie in aCategories:
-            link = categorie['href']
+    response = requests.get(url)
+    if response.ok:
+        soup = BeautifulSoup(response.text, features="html.parser")
+        div_side_categories = soup.find('div', class_='side_categories')
+        ul_nav_list = div_side_categories.find('ul', class_='nav nav-list')
+        ul_categories = ul_nav_list.find('ul')
+        a_categories = ul_categories.findAll('a')
+        for category in a_categories:
+            link = category['href']
             link = link.replace('../', '')
-            categorie = str(categorie.text)
-            categorie = categorie.replace('\n', '')
-            categorie = categorie.replace('  ', '')
+            category = str(category.text)
+            category = category.replace('\n', '')
+            category = category.replace('  ', '')
             link = 'http://books.toscrape.com/catalogue/category/' + link
-            dict[categorie] = link
-        return dict
+            category_links_dict[category] = link
+        return category_links_dict
 

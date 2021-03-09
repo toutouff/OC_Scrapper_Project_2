@@ -2,6 +2,7 @@ import requests
 import csv
 from bs4 import BeautifulSoup
 
+
 class Category:
     def __init__(self, name, url):
         self.bookData = []
@@ -9,45 +10,45 @@ class Category:
         self.url = [url]
         self.books = []
         self.bookLinks = []
-        self.reponse = requests.get(self.url[0])
-        self.soup = BeautifulSoup(self.reponse.text, features="html.parser")
+        self.response = requests.get(self.url[0])
+        self.soup = BeautifulSoup(self.response.text, features="html.parser")
 
-    def getBookLinks(self):
-        self.getAllPage()
+    def get_book_links(self):
+        self.get_all_page()
         for url in self.url:
-            self.reponse = requests.get(url)
-            self.soup = BeautifulSoup(self.reponse.text, features="html.parser")
+            self.response = requests.get(url)
+            self.soup = BeautifulSoup(self.response.text, features="html.parser")
             articles = self.soup.find_all('article', class_="product_pod")
-            articleLinkStart = 'http://books.toscrape.com/catalogue/'
+            article_link_start = 'http://books.toscrape.com/catalogue/'
             for article in articles:
-                articleA = article.find('a')
-                articleLink = str(articleA['href'])
-                articleLink = articleLink.replace('../', '')
-                self.bookLinks.append(articleLinkStart + articleLink)
+                article_a = article.find('a')
+                article_link = str(article_a['href'])
+                article_link = article_link.replace('../', '')
+                self.bookLinks.append(article_link_start + article_link)
         return self.bookLinks
 
-    def addBooks(self):
-        self.getBookLinks()
+    def add_books(self):
+        self.get_book_links()
         for bookLink in self.bookLinks:
-            mybook = Book(bookLink, self.name)
-            mybook.getInfo()
-            self.bookData.append(mybook.Info)
-            self.books.append(mybook)
+            book = Book(bookLink, self.name)
+            book.get_info()
+            self.bookData.append(book.Info)
+            self.books.append(book)
 
-    def getAllPage(self):
+    def get_all_page(self):
         strong = self.soup.findAll('strong')
-        nbrTotProd = int(strong[1].text)
+        nbr_tot_prod = int(strong[1].text)
         i = 2
-        while nbrTotProd > 20:
-            provUrl = self.url[0].replace('index.html', 'page-' + str(i) + '.html')
-            self.url.append(provUrl)
+        while nbr_tot_prod > 20:
+            prov_url = self.url[0].replace('index.html', 'page-' + str(i) + '.html')
+            self.url.append(prov_url)
             i = i + 1
-            nbrTotProd = nbrTotProd - 20
+            nbr_tot_prod = nbr_tot_prod - 20
 
-    def createCsv(self):
+    def create_csv(self):
         csv_file = self.name + '.csv'
-        with open(csv_file, 'w') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=self.bookData[0].keys())
+        with open(csv_file, 'w') as csvFile:
+            writer = csv.DictWriter(csvFile, fieldnames=self.bookData[0].keys())
             writer.writeheader()
             for data in self.bookData:
                 writer.writerow(data)
@@ -55,30 +56,30 @@ class Category:
 
 class Book:
 
-    def __init__(self, url, categorie):
+    def __init__(self, url, category):
         self.img = ''
         self.url = url
-        self.categorie = categorie
+        self.category = category
 
-    def reponse(self):
-        reponse = requests.get(self.url)
-        self.soup = BeautifulSoup(reponse.text, features='html.parser')
-        return reponse
+    def response(self):
+        response = requests.get(self.url)
+        self.soup = BeautifulSoup(response.text, features='html.parser')
+        return response
 
-    def getTitle(self):
+    def get_title(self):
         title = self.soup.find('h1').text
         self.title = title
 
-    def getInfo(self):
-        self.reponse()
+    def get_info(self):
+        self.response()
         table = self.soup.find('table', class_='table table-striped')
         td = table.findAll('td')
         self.upc = td[0].text
         self.priceeExTax = str(td[2].text)
         self.priceIncTax = str(td[3].text)
         self.nbrAiv = td[5].text
-        self.getTitle()
-        self.getProductDescription()
+        self.get_title()
+        self.get_product_description()
         self.getImg()
         self.getStarRating()
         self.Info = {
@@ -88,16 +89,16 @@ class Book:
             'price_including_tax': self.priceIncTax.replace('Â', ''),
             'price_excluding_tax': self.priceeExTax.replace('Â', ''),
             'number_available': self.nbrAiv,
-            'product_description': self.productdescription,
-            'category': self.categorie,
+            'product_description': self.product_description,
+            'category': self.category,
             'review_rating': self.starRating,
             'image_url': self.img
         }
         return self.Info
 
-    def getProductDescription(self):
-        allP = self.soup.findAll('p')
-        self.productdescription = str(allP[3].text)
+    def get_product_description(self):
+        all_p = self.soup.findAll('p')
+        self.product_description = str(all_p[3].text)
 
     def getImg(self):
         row = self.soup.find_all('div', class_='col-sm-6')
@@ -109,5 +110,5 @@ class Book:
         div = self.soup.findAll('div', class_='col-sm-6')
         p = div[1].findAll('p')
         p = p[2]
-        starRating = str(p['class'])
-        self.starRating = str(starRating)
+        star_rating = str(p['class'])
+        self.starRating = str(star_rating)
