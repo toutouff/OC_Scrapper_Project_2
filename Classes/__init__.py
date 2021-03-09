@@ -112,3 +112,4 @@ class Book:
         p = p[2]
         star_rating = str(p['class'])
         self.starRating = str(star_rating)
+
