@@ -105,6 +105,7 @@ class Book:
         img = row[0].find('img')
         img = str(img['src'])
         self.img = 'https://books.toscrape.com/' + img.replace('../', '')
+        self.downLoadImg()
 
     def getStarRating(self):
         div = self.soup.findAll('div', class_='col-sm-6')
@@ -113,3 +114,9 @@ class Book:
         star_rating = str(p['class'])
         self.starRating = str(star_rating)
 
+    def downLoadImg(self):
+        img_url = self.img
+        response = requests.get(img_url)
+        file = open(self.title + ".png", "wb")
+        file.write(response.content)
+        file.close()
