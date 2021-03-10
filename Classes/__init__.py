@@ -47,7 +47,7 @@ class Category:
 
     def create_csv(self):
         csv_file = self.name + '.csv'
-        with open(csv_file, 'w') as csvFile:
+        with open("data/" + csv_file, 'w') as csvFile:
             writer = csv.DictWriter(csvFile, fieldnames=self.bookData[0].keys())
             writer.writeheader()
             for data in self.bookData:
@@ -105,7 +105,10 @@ class Book:
         img = row[0].find('img')
         img = str(img['src'])
         self.img = 'https://books.toscrape.com/' + img.replace('../', '')
-        self.downLoadImg()
+        try:
+            self.downLoadImg()
+        except:
+            print("une erreur est survenue lors du telechargement ")
 
     def getStarRating(self):
         div = self.soup.findAll('div', class_='col-sm-6')
@@ -117,6 +120,10 @@ class Book:
     def downLoadImg(self):
         img_url = self.img
         response = requests.get(img_url)
-        file = open(self.title + ".png", "wb")
-        file.write(response.content)
-        file.close()
+        img_title = self.title + ".png"
+        img_title = img_title.replace('/', '')
+        with open("data/" + img_title, "wb") as img_file:
+            img_file.write(response.content)
+            img_file.close()
+        print(img_title)
+
